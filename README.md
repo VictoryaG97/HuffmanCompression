@@ -1,0 +1,1 @@
+# A Java multi threaded implementation of Huffman's compression algorithm 
