@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.Iterator;
+import java.util.Map;
+import java.io.*;
 
 public class MainThread implements Runnable {
 
@@ -41,15 +44,40 @@ public class MainThread implements Runnable {
         return frequency_map;
     }
 
-    @Override
+    public void writeMapToFile() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt", true));
+        Iterator<Map.Entry<Character, Integer>> it = frequency_map.entrySet().iterator();
+        int count = 0;
+
+        writer.write("Thread-" + thread_name + "\n");
+
+        while(it.hasNext() && count < frequency_map.size()) {
+            Map.Entry<Character, Integer> pairs = it.next();
+            writer.write(pairs.getKey() + " = " + pairs.getValue() + "\n\n");
+
+            count++;
+        }
+        writer.close();
+    }
+
+    // @Override
     public void run() {
         String logger_message = Thread.currentThread().getName() + " running..."; 
         logger.info(logger_message);
 
         buildFrequencyMap();
         System.out.println(getFrequencyMap());
+        full_freq_map.putAll(frequency_map);
+
+        try {
+            writeMapToFile();
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(0);
+        }
 
         logger_message = Thread.currentThread().getName() + " exiting."; 
         logger.info(logger_message);
+        data.clear();
     }
 }
