@@ -1,8 +1,9 @@
 import org.apache.commons.cli.*;
 
-public class ArgParser {
 
-    Options options;
+public class ArgParser {
+	
+	Options options;
     CommandLine cmd;
 
     public ArgParser(String[] args) {
