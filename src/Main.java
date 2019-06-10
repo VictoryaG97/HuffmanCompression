@@ -11,7 +11,7 @@ public class Main {
             quiet = true;
         }
         
-        MainThread mt = new MainThread(input_file, max_threads);
+        MainThread mt = new MainThread(input_file, max_threads, quiet);
         mt.runThreads();
     }
 }
