@@ -14,7 +14,7 @@ public class SingleThread implements Runnable{
 	
 	public SingleThread(ConcurrentHashMap<Character, Integer> main_map, 
 						ArrayList<String> part_data, Integer thread_index) {
-		frequency_map = main_map;
+		frequency_map = new ConcurrentHashMap<Character, Integer>();
 		
 		data = part_data;
 		thread_name = thread_index;
@@ -40,7 +40,7 @@ public class SingleThread implements Runnable{
 		logger.info(logger_message);
 		
 		buildFrequencyMap();
-		System.out.println(Thread.currentThread().getName() + frequency_map);
+		System.out.println(Thread.currentThread().getName() + " " + frequency_map);
 		
 		long end_time = System.currentTimeMillis();
         long execution_time = end_time - start_time;
